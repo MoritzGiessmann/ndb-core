@@ -6,10 +6,10 @@ import {Child} from '../child';
 import {SchoolBlockComponent} from '../../schools/school-block/school-block.component';
 import {MatIconModule} from '@angular/material';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {MockDatabase} from '../../database/mock-database';
 import {ChildrenService} from '../children.service';
 import {Database} from '../../database/database';
 import {ChildWithRelation} from '../childWithRelation';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('ChildBlockComponent', () => {
   let component: ChildBlockComponent;
@@ -17,15 +17,13 @@ describe('ChildBlockComponent', () => {
 
 
   beforeEach(async(() => {
-    const entityMapper = new EntityMapperService(new MockDatabase());
-
     TestBed.configureTestingModule({
       declarations: [ SchoolBlockComponent, ChildBlockComponent ],
       imports: [RouterTestingModule, MatIconModule],
       providers: [
-        {provide: EntityMapperService, useValue: entityMapper},
+        EntityMapperService,
         ChildrenService,
-        {provide: Database, useClass: MockDatabase},
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
       ],
     })
     .compileComponents();

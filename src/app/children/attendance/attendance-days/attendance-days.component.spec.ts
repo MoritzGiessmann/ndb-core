@@ -6,9 +6,9 @@ import {FormsModule} from '@angular/forms';
 import {UiHelperModule} from '../../../ui-helper/ui-helper.module';
 import {EntityModule} from '../../../entity/entity.module';
 import {Database} from '../../../database/database';
-import {MockDatabase} from '../../../database/mock-database';
 import {AttendanceMonth} from '../attendance-month';
 import {AttendanceDayBlockComponent} from './attendance-day-block.component';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
 
 describe('AttendanceDaysComponent', () => {
   let component: AttendanceDaysComponent;
@@ -27,7 +27,7 @@ describe('AttendanceDaysComponent', () => {
         FormsModule,
         UiHelperModule, EntityModule],
       providers: [
-        { provide: Database, useClass: MockDatabase },
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
       ]
     })
     .compileComponents();

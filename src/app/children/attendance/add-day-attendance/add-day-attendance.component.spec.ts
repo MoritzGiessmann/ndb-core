@@ -13,13 +13,15 @@ import {SchoolBlockComponent} from '../../../schools/school-block/school-block.c
 import {ChildBlockComponent} from '../../child-block/child-block.component';
 import {ChildrenService} from '../../children.service';
 import {Database} from '../../../database/database';
-import {MockDatabase} from '../../../database/mock-database';
 import {EntityModule} from '../../../entity/entity.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {Router} from '@angular/router';
 
 describe('AddDayAttendanceComponent', () => {
   let component: AddDayAttendanceComponent;
   let fixture: ComponentFixture<AddDayAttendanceComponent>;
+  const mockedRouter = {navigate: () => null};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,7 +31,8 @@ describe('AddDayAttendanceComponent', () => {
         EntityModule],
       providers: [
         {provide: ChildrenService, useClass: ChildrenService},
-        {provide: Database, useClass: MockDatabase},
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
+        {provide: Router, useValue: mockedRouter},
       ],
     })
     .compileComponents();

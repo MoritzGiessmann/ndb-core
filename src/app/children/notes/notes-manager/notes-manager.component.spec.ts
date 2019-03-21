@@ -10,13 +10,13 @@ import {
 } from '@angular/material';
 import {ChildBlockComponent} from '../../child-block/child-block.component';
 import {EntityMapperService} from '../../../entity/entity-mapper.service';
-import {MockDatabase} from '../../../database/mock-database';
 import {Database} from '../../../database/database';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {SchoolBlockComponent} from '../../../schools/school-block/school-block.component';
 import {SessionService} from '../../../session/session.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
 
 describe('NotesManagerComponent', () => {
   let component: NotesManagerComponent;
@@ -41,7 +41,7 @@ describe('NotesManagerComponent', () => {
         NoopAnimationsModule,
       ],
       providers: [
-        { provide: Database, useClass: MockDatabase },
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
         EntityMapperService,
         { provide: SessionService, useValue: mockSessionService },
       ],

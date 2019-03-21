@@ -19,7 +19,6 @@ import { Injectable } from '@angular/core';
 import { DatabaseManagerService } from './database-manager.service';
 import { User } from '../user/user';
 import { Database } from './database';
-import { isNullOrUndefined } from 'util';
 import {MockDatabase} from './mock-database';
 import {EntityMapperService} from '../entity/entity-mapper.service';
 import {DatabaseSyncStatus} from './database-sync-status.enum';

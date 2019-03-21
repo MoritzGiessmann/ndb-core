@@ -8,8 +8,8 @@ import {SchoolBlockComponent} from '../../../schools/school-block/school-block.c
 import {ChildrenService} from '../../children.service';
 import {EntityModule} from '../../../entity/entity.module';
 import {Database} from '../../../database/database';
-import {MockDatabase} from '../../../database/mock-database';
 import {RouterTestingModule} from '@angular/router/testing';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
 
 describe('AttendanceWeekDashboardComponent', () => {
   let component: AttendanceWeekDashboardComponent;
@@ -22,8 +22,8 @@ describe('AttendanceWeekDashboardComponent', () => {
         RouterTestingModule.withRoutes([]),
         EntityModule],
       providers: [
-        { provide: ChildrenService, useClass: ChildrenService },
-        { provide: Database, useClass: MockDatabase },
+        ChildrenService,
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
       ]
     })
     .compileComponents();

@@ -11,25 +11,23 @@ import {
   MatTableModule
 } from '@angular/material';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {MockDatabase} from '../../database/mock-database';
 import {ConfirmationDialogService} from '../confirmation-dialog/confirmation-dialog.service';
+import {Database} from '../../database/database';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('EntitySubrecordComponent', () => {
   let component: EntitySubrecordComponent;
   let fixture: ComponentFixture<EntitySubrecordComponent>;
 
-  let mockEntityMapper;
-
   beforeEach(async(() => {
-    mockEntityMapper = new EntityMapperService(new MockDatabase());
-
     TestBed.configureTestingModule({
       declarations: [ EntitySubrecordComponent ],
       imports: [MatTableModule, MatFormFieldModule, MatIconModule,
         MatSnackBarModule, MatSelectModule, MatDialogModule, MatAutocompleteModule],
       providers: [
-        { provide: EntityMapperService, useValue: mockEntityMapper },
-        { provide: ConfirmationDialogService, useClass: ConfirmationDialogService },
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
+        ConfirmationDialogService,
+        EntityMapperService,
       ],
     })
     .compileComponents();

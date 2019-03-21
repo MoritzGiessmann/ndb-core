@@ -7,13 +7,15 @@ import {ChildrenService} from '../../children.service';
 import {UiHelperModule} from '../../../ui-helper/ui-helper.module';
 import {DatePipe, PercentPipe} from '@angular/common';
 import {EntityMapperService} from '../../../entity/entity-mapper.service';
-import {MockDatabase} from '../../../database/mock-database';
 import {DemoData} from '../../../database/demo-data';
 import {AttendanceDaysComponent} from '../attendance-days/attendance-days.component';
 import {AttendanceDayBlockComponent} from '../attendance-days/attendance-day-block.component';
 import {MatSelectModule, MatTooltipModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {Observable, of} from 'rxjs';
+import {Database} from '../../../database/database';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ChildAttendanceComponent', () => {
   let component: ChildAttendanceComponent;
@@ -34,20 +36,23 @@ describe('ChildAttendanceComponent', () => {
     }
   };
 
-  let mockEntityMapper;
-
-
   beforeEach(async(() => {
-    mockEntityMapper = new EntityMapperService(new MockDatabase());
 
     TestBed.configureTestingModule({
       declarations: [ ChildAttendanceComponent, AttendanceDaysComponent, AttendanceDayBlockComponent ],
-      imports: [UiHelperModule, MatSelectModule, FormsModule, MatTooltipModule],
+      imports: [
+        UiHelperModule,
+        MatSelectModule,
+        FormsModule,
+        MatTooltipModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         DatePipe, PercentPipe,
         { provide: ActivatedRoute, useValue: {params: of({id: '22'})} },
         { provide: ChildrenService, useValue: mockChildrenService },
-        { provide: EntityMapperService, useValue: mockEntityMapper },
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
+        EntityMapperService,
       ],
     })
     .compileComponents();

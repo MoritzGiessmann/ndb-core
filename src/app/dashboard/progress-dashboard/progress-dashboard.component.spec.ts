@@ -12,23 +12,22 @@ import {
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {MockDatabase} from '../../database/mock-database';
+import {Database} from '../../database/database';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('ProgressDashboardComponent', () => {
   let component: ProgressDashboardComponent;
   let fixture: ComponentFixture<ProgressDashboardComponent>;
 
-  let mockEntityMapper;
-
   beforeEach(async(() => {
-    mockEntityMapper = new EntityMapperService(new MockDatabase());
 
     TestBed.configureTestingModule({
       declarations: [ ProgressDashboardComponent ],
       imports: [ MatIconModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule,
         CommonModule, FormsModule],
       providers: [
-        { provide: EntityMapperService, useValue: mockEntityMapper },
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
+        EntityMapperService,
       ]
     })
     .compileComponents();

@@ -16,15 +16,17 @@ import {ChildSelectComponent} from '../../child-select/child-select.component';
 import {ChildBlockComponent} from '../../child-block/child-block.component';
 import {Note} from '../note';
 import {Database} from '../../../database/database';
-import {MockDatabase} from '../../../database/mock-database';
 import {ChildrenService} from '../../children.service';
 import {WarningLevel} from '../../attendance/warning-level';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {SchoolBlockComponent} from '../../../schools/school-block/school-block.component';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {Router} from '@angular/router';
 
 describe('NoteDetailsComponent', () => {
   let component: NoteDetailsComponent;
   let fixture: ComponentFixture<NoteDetailsComponent>;
+  const mockedRouter = {navigate: () => null};
 
   let note;
 
@@ -43,10 +45,11 @@ describe('NoteDetailsComponent', () => {
         FormsModule, NoopAnimationsModule, MatIconModule,
         UiHelperModule, EntityModule],
       providers: [
-        {provide: Database, useClass: MockDatabase},
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         {provide: MatDialogRef, useValue: {beforeClose: () => { return { subscribe: () => {}}}}},
         {provide: MAT_DIALOG_DATA, useValue: {entity: note}},
-        {provide: ChildrenService, useClass: ChildrenService},
+        {provide: Router, useValue: mockedRouter},
+        ChildrenService,
         ],
     })
     .compileComponents();

@@ -6,11 +6,12 @@ import {FormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ChildrenService} from '../children.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {MockDatabase} from '../../database/mock-database';
 import {Child} from '../child';
 import {DatePipe} from '@angular/common';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {of} from 'rxjs';
+import {Database} from '../../database/database';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('AserComponent', () => {
   let component: AserComponent;
@@ -24,11 +25,9 @@ describe('AserComponent', () => {
       return of([]);
     }
   };
-  let mockEntityMapper;
 
 
   beforeEach(async(() => {
-    mockEntityMapper = new EntityMapperService(new MockDatabase());
 
     TestBed.configureTestingModule({
       declarations: [ AserComponent ],
@@ -37,7 +36,8 @@ describe('AserComponent', () => {
         DatePipe,
         { provide: ActivatedRoute, useValue: {paramMap: of({get: () => '22'}) } },
         { provide: ChildrenService, useValue: mockChildrenService },
-        { provide: EntityMapperService, useValue: mockEntityMapper },
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
+        EntityMapperService,
       ],
     })
     .compileComponents();

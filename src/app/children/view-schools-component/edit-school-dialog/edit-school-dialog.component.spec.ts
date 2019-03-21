@@ -11,17 +11,17 @@ import {
 import { EditSchoolDialogComponent } from './edit-school-dialog.component';
 import {FormsModule} from '@angular/forms';
 import {EntityMapperService} from '../../../entity/entity-mapper.service';
-import {MockDatabase} from '../../../database/mock-database';
 import {Child} from '../../child';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {Database} from '../../../database/database';
 
 describe('EditSchoolDialogComponent', () => {
   let component: EditSchoolDialogComponent;
   let fixture: ComponentFixture<EditSchoolDialogComponent>;
 
   beforeEach(async(() => {
-    const entityMapper = new EntityMapperService(new MockDatabase());
-    TestBed.configureTestingModule({
+   TestBed.configureTestingModule({
       declarations: [ EditSchoolDialogComponent ],
       imports: [
         MatFormFieldModule,
@@ -32,9 +32,10 @@ describe('EditSchoolDialogComponent', () => {
         BrowserAnimationsModule,
       ],
       providers: [
-        {provide: EntityMapperService, useValue: entityMapper},
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         {provide: MatDialogRef, useValue: MatDialogRef},
         {provide: MAT_DIALOG_DATA, useValue: {child: new Child('')}},
+        EntityMapperService,
       ]
     })
     .compileComponents();

@@ -17,11 +17,11 @@ import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {AlertService} from '../../alerts/alert.service';
 import {ConfirmationDialogService} from '../../ui-helper/confirmation-dialog/confirmation-dialog.service';
 import {Database} from '../../database/database';
-import {MockDatabase} from '../../database/mock-database';
 import { Location } from '@angular/common';
 import {Observable} from 'rxjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import * as uniqid from 'uniqid'; //  Necessary for usage of uniqid in the component
+import * as uniqid from 'uniqid';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service'; //  Necessary for usage of uniqid in the component
 
 describe('SchoolDetailComponent', () => {
   let component: SchoolDetailComponent;
@@ -60,7 +60,7 @@ describe('SchoolDetailComponent', () => {
         { provide: Location, useValue: mockedLocation},
         { provide: Router, useValue: mockedRouter},
         { provide: ActivatedRoute, useValue: mockedRoute},
-        { provide: Database, useClass: MockDatabase}
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase()}
       ]
     })
     .compileComponents();

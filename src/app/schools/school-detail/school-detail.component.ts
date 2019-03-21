@@ -2,9 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {School} from '../school';
 import {SchoolsService} from '../schools.service';
-import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import * as uniqid from 'uniqid';
 import {AlertService} from '../../alerts/alert.service';
 import {MatSnackBar, MatTableDataSource} from '@angular/material';
 import {ConfirmationDialogService} from '../../ui-helper/confirmation-dialog/confirmation-dialog.service';
@@ -47,7 +45,6 @@ export class SchoolDetailComponent implements OnInit {
     private router: Router,
     private location: Location,
     @Inject(FormBuilder) public fb: FormBuilder,
-    private entityMapperService: EntityMapperService,
     private alertService: AlertService,
     private snackBar: MatSnackBar,
     private confirmationDialog: ConfirmationDialogService,
@@ -59,7 +56,7 @@ export class SchoolDetailComponent implements OnInit {
     if (id === 'new') {
       this.creatingNew = true;
       this.editing = true;
-      this.school = new School(uniqid());
+      this.school = this.schoolService.createSchool();
     } else {
       this.studentDataSource.data = [];
       this.loadSchool(id);
@@ -73,10 +70,12 @@ export class SchoolDetailComponent implements OnInit {
   }
 
   loadSchool(id: string) {
-    this.entityMapperService.load<School>(School, id)
-      .then(school => this.school = school)
-      .then(() => this.initializeForm())
-      .then(() => this.loadStudents());
+    this.schoolService.getSchool(id)
+      .subscribe(school => {
+        this.school = school;
+        this.initializeForm();
+        this.loadStudents();
+      });
   }
 
   loadStudents() {
@@ -99,12 +98,12 @@ export class SchoolDetailComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(confirmed => {
         if (confirmed) {
-          this.entityMapperService.remove<School>(this.school)
-            .then(() => this.router.navigate(['/school']));
+          this.schoolService.deleteSchool(this.school)
+            .subscribe(() => this.router.navigate(['/school']));
 
           const snackBarRef = this.snackBar.open('Deleted School "' + this.school.name + '"', 'Undo', {duration: 8000});
           snackBarRef.onAction().subscribe(() => {
-            this.entityMapperService.save(this.school, true);
+            this.schoolService.saveSchool(this.school, true);
             this.router.navigate(['/school', this.school.getId()]);
           });
         }
@@ -114,15 +113,16 @@ export class SchoolDetailComponent implements OnInit {
   saveSchool() {
     this.assignFormValuesToSchool(this.school, this.form);
 
-    this.entityMapperService.save<School>(this.school)
-      .then(() => {
+    this.schoolService.saveSchool(this.school)
+      .subscribe(() => {
         if (this.creatingNew) {
           this.router.navigate(['/school', this.school.getId()]);
           this.creatingNew = false;
         }
         this.switchEdit();
-      })
-      .catch((err) => this.alertService.addDanger('Could not save School "' + this.school.name + '": ' + err));
+      }, (err) =>
+        this.alertService.addDanger('Could not save School "' + this.school.name + '": ' + err)
+      );
   }
 
   private assignFormValuesToSchool(school: School, form: FormGroup) {

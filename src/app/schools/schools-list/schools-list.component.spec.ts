@@ -12,16 +12,15 @@ import {
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {Database} from '../../database/database';
-import {MockDatabase} from '../../database/mock-database';
 import {SchoolsService} from '../schools.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {Router} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('SchoolsListComponent', () => {
   let component: SchoolsListComponent;
   let fixture: ComponentFixture<SchoolsListComponent>;
-  const mockedEntityMapper = new EntityMapperService(new MockDatabase());
   const mockedRouter = {navigate: () => null};
 
   beforeEach(async(() => {
@@ -40,8 +39,8 @@ describe('SchoolsListComponent', () => {
       ],
       providers: [
         SchoolsService,
-        {provide: Database, useClass: MockDatabase},
-        {provide: EntityMapperService, useValue: mockedEntityMapper},
+        EntityMapperService,
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         {provide: Router, useValue: mockedRouter},
       ]
     })

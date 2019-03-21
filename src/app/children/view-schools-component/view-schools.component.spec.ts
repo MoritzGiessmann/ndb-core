@@ -8,6 +8,7 @@ import {ChildrenService} from '../children.service';
 import {ChangeDetectorRef} from '@angular/core';
 import {LoggingService} from '../../logging/logging.service';
 import {Database} from '../../database/database';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('ViewSchoolsComponent', () => {
   let component: ViewSchoolsComponent;
@@ -29,7 +30,7 @@ describe('ViewSchoolsComponent', () => {
         MatDialog,
         ChangeDetectorRef,
         LoggingService,
-        { provide: Database, useClass: MockDatabase}
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase()}
       ],
     })
     .compileComponents();

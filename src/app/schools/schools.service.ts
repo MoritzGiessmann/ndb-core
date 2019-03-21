@@ -6,15 +6,31 @@ import {ChildSchoolRelation} from '../children/childSchoolRelation';
 import {Database} from '../database/database';
 import {Child} from '../children/child';
 import {ChildWithRelation} from '../children/childWithRelation';
-
+import * as uniqid from 'uniqid';
 @Injectable()
 export class SchoolsService {
 
   constructor(private entityMapper: EntityMapperService, private db: Database) {
   }
 
+  createSchool(): School {
+    return new School(uniqid());
+  }
+
   getSchools(): Observable<School[]> {
     return from(this.entityMapper.loadType<School>(School));
+  }
+
+  getSchool(id: string): Observable<School> {
+    return from(this.entityMapper.load<School>(School, id));
+  }
+
+  saveSchool(school: School, forceUpdate: boolean = false): Observable<any> {
+    return from(this.entityMapper.save<School>(school, forceUpdate));
+  }
+
+  deleteSchool(school: School): Observable<any> {
+    return from(this.entityMapper.remove<School>(school));
   }
 
   /***

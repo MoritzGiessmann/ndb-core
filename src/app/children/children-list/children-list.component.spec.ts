@@ -10,7 +10,6 @@ import {
 import {CommonModule} from '@angular/common';
 import {ChildrenService} from '../children.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {MockDatabase} from '../../database/mock-database';
 import {Database} from '../../database/database';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -22,6 +21,7 @@ import {FilterPipeModule} from 'ngx-filter-pipe';
 import {AttendanceDaysComponent} from '../attendance/attendance-days/attendance-days.component';
 import {UiHelperModule} from '../../ui-helper/ui-helper.module';
 import {AttendanceDayBlockComponent} from '../attendance/attendance-days/attendance-day-block.component';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('ChildrenListComponent', () => {
   let component: ChildrenListComponent;
@@ -53,7 +53,11 @@ describe('ChildrenListComponent', () => {
         ]),
         UiHelperModule,
       ],
-      providers: [ChildrenService, EntityMapperService, { provide: Database, useClass: MockDatabase }],
+      providers: [
+        ChildrenService,
+        EntityMapperService,
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
+        ],
     })
     .compileComponents();
   }));

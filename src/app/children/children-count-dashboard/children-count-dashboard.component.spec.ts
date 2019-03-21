@@ -7,6 +7,8 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Child} from '../child';
 import {MockDatabase} from '../../database/mock-database';
 import {Observable} from 'rxjs';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {EntityMapperService} from '../../entity/entity-mapper.service';
 
 describe('ChildrenCountDashboardComponent', () => {
   let component: ChildrenCountDashboardComponent;
@@ -24,7 +26,8 @@ describe('ChildrenCountDashboardComponent', () => {
   }
 
   beforeEach(async(() => {
-    childrenService = new ChildrenService(null, new MockDatabase());
+    const mockDb = new MockDatabaseManagerService().getDatabase();
+    childrenService = new ChildrenService(new EntityMapperService(mockDb), mockDb);
     spyOn(childrenService, 'getChildren').and
       .returnValue(new Observable((observer) => { childrenObserver = observer; }));
 

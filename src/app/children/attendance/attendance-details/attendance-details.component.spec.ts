@@ -17,13 +17,13 @@ import {AttendanceDaysComponent} from '../attendance-days/attendance-days.compon
 import {SchoolBlockComponent} from '../../../schools/school-block/school-block.component';
 import {UiHelperModule} from '../../../ui-helper/ui-helper.module';
 import {Database} from '../../../database/database';
-import {MockDatabase} from '../../../database/mock-database';
 import {ChildrenService} from '../../children.service';
 import {AttendanceMonth} from '../attendance-month';
 import {EntityModule} from '../../../entity/entity.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {AttendanceDayBlockComponent} from '../attendance-days/attendance-day-block.component';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
 
 describe('AttendanceDetailsComponent', () => {
   let component: AttendanceDetailsComponent;
@@ -40,7 +40,7 @@ describe('AttendanceDetailsComponent', () => {
         FormsModule, CommonModule, RouterTestingModule, NoopAnimationsModule,
         UiHelperModule, EntityModule],
       providers: [
-        {provide: Database, useClass: MockDatabase},
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         {provide: MatDialogRef, useValue: {beforeClose: () => { return { subscribe: () => {}}}}},
         {provide: MAT_DIALOG_DATA, useValue: {entity: att}},
         {provide: ChildrenService, useClass: ChildrenService},

@@ -4,11 +4,11 @@ import { AttendanceWarningsDashboardComponent } from './attendance-warnings-dash
 import {MatCardModule, MatIconModule} from '@angular/material';
 import {ChildBlockComponent} from '../../child-block/child-block.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {MockDatabase} from '../../../database/mock-database';
 import {Database} from '../../../database/database';
 import {EntityMapperService} from '../../../entity/entity-mapper.service';
 import {ChildrenService} from '../../children.service';
 import {SchoolBlockComponent} from '../../../schools/school-block/school-block.component';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
 
 describe('AttendanceWarningsDashboardComponent', () => {
   let component: AttendanceWarningsDashboardComponent;
@@ -18,7 +18,11 @@ describe('AttendanceWarningsDashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ChildBlockComponent, SchoolBlockComponent, AttendanceWarningsDashboardComponent ],
       imports: [MatIconModule, MatCardModule, RouterTestingModule],
-      providers: [ChildrenService, EntityMapperService, { provide: Database, useClass: MockDatabase }],
+      providers: [
+        ChildrenService,
+        EntityMapperService,
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() }
+        ],
     })
     .compileComponents();
   }));

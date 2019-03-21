@@ -12,12 +12,11 @@ import {
 } from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {AlertService} from '../../alerts/alert.service';
 import {ConfirmationDialogService} from '../../ui-helper/confirmation-dialog/confirmation-dialog.service';
 import {Database} from '../../database/database';
-import {MockDatabase} from '../../database/mock-database';
 import {DatePipe, Location, PercentPipe} from '@angular/common';
 import {Observable} from 'rxjs';
 import * as uniqid from 'uniqid'; //  Necessary for usage of uniqid in the component
@@ -37,6 +36,7 @@ import {MatSnackBar} from '@angular/material';
 import {SessionService} from '../../session/session.service';
 import {DatabaseManagerService} from '../../database/database-manager.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 
 describe('ChildDetailsComponent', () => {
   let component: ChildDetailsComponent;
@@ -98,7 +98,7 @@ describe('ChildDetailsComponent', () => {
         { provide: Location, useValue: mockedLocation},
         { provide: Router, useValue: mockedRouter},
         { provide: ActivatedRoute, useValue: mockedRoute},
-        { provide: Database, useClass: MockDatabase},
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         FormBuilder,
       ]
     })

@@ -22,9 +22,9 @@ import {FormsModule} from '@angular/forms';
 import {UiHelperModule} from '../../../ui-helper/ui-helper.module';
 import {ChildrenService} from '../../children.service';
 import {Database} from '../../../database/database';
-import {MockDatabase} from '../../../database/mock-database';
 import {EntityModule} from '../../../entity/entity.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
 
 describe('AttendanceManagerComponent', () => {
   let component: AttendanceManagerComponent;
@@ -38,8 +38,8 @@ describe('AttendanceManagerComponent', () => {
         MatProgressBarModule, MatTooltipModule, MatSelectModule, MatIconModule, FormsModule, NoopAnimationsModule,
         UiHelperModule, EntityModule],
       providers: [
-        {provide: ChildrenService, useClass: ChildrenService},
-        {provide: Database, useClass: MockDatabase},
+        ChildrenService,
+        {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
       ],
     })
     .compileComponents();
