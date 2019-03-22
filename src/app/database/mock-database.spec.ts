@@ -16,6 +16,7 @@
  */
 
 import { MockDatabase } from './mock-database';
+import {ChildSchoolRelation} from '../children/childSchoolRelation';
 
 describe('MockDatabase tests', () => {
   let database: MockDatabase;
@@ -179,6 +180,37 @@ describe('MockDatabase tests', () => {
     });
   });
 
+  it('returns ChildSchoolRelations in correct order', function (done) {
+    const rel1: any = new ChildSchoolRelation('1');
+    rel1._id = ChildSchoolRelation.ENTITY_TYPE + '1';
+    rel1.childId = '1';
+    rel1.start = new Date().toString();
+    const rel2: any = new ChildSchoolRelation('2');
+    rel2._id = ChildSchoolRelation.ENTITY_TYPE + '2';
+    rel2.childId = '1';
+    rel2.start = new Date('01/01/2000').toString();
+    const rel3: any = new ChildSchoolRelation('3');
+    rel3._id = ChildSchoolRelation.ENTITY_TYPE + '3';
+    rel3.childId = '1';
+    rel3.start = new Date('01/02/2000').toString();
+
+    database.put(rel1)
+      .then(() => database.put(rel2))
+      .then(() => database.put(rel3))
+      .then(() => {
+        database.query('childSchoolRelations_index/by_date', {endkey: '1'})
+          .then(res => {
+            for (let i = 0; i < res.rows.length; i++) {
+              expect(res.rows[i].doc.childId).toBe('1');
+              for (let j = i; j < res.rows.length; j++) {
+                expect(new Date(res.rows[i].doc.start).valueOf()).not.toBeLessThan(new Date(res.rows[j].doc.start).valueOf())
+              }
+            }
+            done()
+          })
+      })
+      .catch(err => fail(err));
+  });
 
   function expectIdInDatabase(id, done) {
     return database.get(id).then(

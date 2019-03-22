@@ -120,7 +120,7 @@ export class ChildrenService {
         by_date: {
           map: `(doc) => {
             if (!doc._id.startsWith("${ChildSchoolRelation.ENTITY_TYPE}")) return;
-            emit(doc.childId + (new Date(doc.start)).getTime());
+            emit(doc.childId + (new Date(doc.start)).getTime().toString().padStart(14, "0"));
             }`
         }
 
