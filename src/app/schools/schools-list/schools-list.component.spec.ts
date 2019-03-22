@@ -17,6 +17,7 @@ import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {Router} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SchoolsListComponent', () => {
   let component: SchoolsListComponent;
@@ -36,6 +37,7 @@ describe('SchoolsListComponent', () => {
         MatExpansionModule,
         FormsModule,
         BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         SchoolsService,

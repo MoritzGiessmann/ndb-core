@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {Database} from '../../database/database';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ProgressDashboardComponent', () => {
   let component: ProgressDashboardComponent;
@@ -23,8 +24,17 @@ describe('ProgressDashboardComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ ProgressDashboardComponent ],
-      imports: [ MatIconModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule,
-        CommonModule, FormsModule],
+      imports: [
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatProgressBarModule,
+        CommonModule,
+        FormsModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },
         EntityMapperService,
