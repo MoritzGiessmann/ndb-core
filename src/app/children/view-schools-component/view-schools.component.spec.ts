@@ -3,17 +3,16 @@ import {MatIconModule, MatFormFieldModule, MatTableModule, MatDialogModule, MatD
 
 import { ViewSchoolsComponent } from './view-schools.component';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import { MockDatabase } from '../../database/mock-database';
 import {ChildrenService} from '../children.service';
 import {ChangeDetectorRef} from '@angular/core';
 import {LoggingService} from '../../logging/logging.service';
 import {Database} from '../../database/database';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {DemoData} from '../../database/demo-data';
 
 describe('ViewSchoolsComponent', () => {
   let component: ViewSchoolsComponent;
   let fixture: ComponentFixture<ViewSchoolsComponent>;
-  const entityMapper = new EntityMapperService(new MockDatabase());
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,6 +38,7 @@ describe('ViewSchoolsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewSchoolsComponent);
     component = fixture.componentInstance;
+    component.child = DemoData.getChildEntities()[0];
     fixture.detectChanges();
   });
 
