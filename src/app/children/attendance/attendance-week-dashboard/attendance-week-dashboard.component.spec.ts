@@ -17,8 +17,16 @@ describe('AttendanceWeekDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AttendanceWeekDashboardComponent, ChildBlockComponent, AttendanceDayBlockComponent, SchoolBlockComponent ],
-      imports: [MatIconModule, MatCardModule, MatTooltipModule,
+      declarations: [
+        AttendanceWeekDashboardComponent,
+        ChildBlockComponent,
+        AttendanceDayBlockComponent,
+        SchoolBlockComponent
+      ],
+      imports: [
+        MatIconModule,
+        MatCardModule,
+        MatTooltipModule,
         RouterTestingModule.withRoutes([]),
         EntityModule],
       providers: [

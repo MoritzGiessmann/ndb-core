@@ -16,12 +16,10 @@ import {Database} from '../../../database/database';
 import {EntityModule} from '../../../entity/entity.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
-import {Router} from '@angular/router';
 
 describe('AddDayAttendanceComponent', () => {
   let component: AddDayAttendanceComponent;
   let fixture: ComponentFixture<AddDayAttendanceComponent>;
-  const mockedRouter = {navigate: () => null};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,7 +30,6 @@ describe('AddDayAttendanceComponent', () => {
       providers: [
         {provide: ChildrenService, useClass: ChildrenService},
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
-        {provide: Router, useValue: mockedRouter},
       ],
     })
     .compileComponents();

@@ -14,7 +14,6 @@ import {FormsModule} from '@angular/forms';
 import {Database} from '../../database/database';
 import {SchoolsService} from '../schools.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {Router} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -22,7 +21,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 describe('SchoolsListComponent', () => {
   let component: SchoolsListComponent;
   let fixture: ComponentFixture<SchoolsListComponent>;
-  const mockedRouter = {navigate: () => null};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,7 +41,6 @@ describe('SchoolsListComponent', () => {
         SchoolsService,
         EntityMapperService,
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
-        {provide: Router, useValue: mockedRouter},
       ]
     })
     .compileComponents();
@@ -55,7 +52,6 @@ describe('SchoolsListComponent', () => {
     fixture.detectChanges();
   });
 
-  // TODO: reactivate component test
   it('should create', () => {
     expect(component).toBeTruthy();
   });

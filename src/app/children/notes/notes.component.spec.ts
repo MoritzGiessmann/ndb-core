@@ -13,6 +13,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {of} from 'rxjs';
 import {Database} from '../../database/database';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('NotesComponent', () => {
   let component: NotesComponent;
@@ -35,7 +36,11 @@ describe('NotesComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ NotesComponent ],
-      imports: [UiHelperModule, NoopAnimationsModule],
+      imports: [
+        UiHelperModule,
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([])
+      ],
       providers: [
         DatePipe,
         { provide: ActivatedRoute, useValue: {paramMap: of({get: () => '22'}) } },

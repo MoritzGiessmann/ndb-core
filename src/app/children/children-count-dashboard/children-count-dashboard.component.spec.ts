@@ -5,7 +5,6 @@ import {MatCardModule, MatIconModule} from '@angular/material';
 import {ChildrenService} from '../children.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Child} from '../child';
-import {MockDatabase} from '../../database/mock-database';
 import {Observable} from 'rxjs';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
@@ -36,7 +35,7 @@ describe('ChildrenCountDashboardComponent', () => {
       imports: [
         MatIconModule,
         MatCardModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([]),
       ],
       providers: [{ provide: ChildrenService, useValue: childrenService }],
     })

@@ -36,9 +36,20 @@ describe('AttendanceDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AttendanceDetailsComponent, AttendanceDayBlockComponent, AttendanceDaysComponent,
         ChildBlockComponent, SchoolBlockComponent ],
-      imports: [ MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatIconModule, MatTooltipModule,
-        FormsModule, CommonModule, RouterTestingModule, NoopAnimationsModule,
-        UiHelperModule, EntityModule],
+      imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatIconModule,
+        MatTooltipModule,
+        FormsModule,
+        CommonModule,
+        RouterTestingModule.withRoutes([]),
+        NoopAnimationsModule,
+        UiHelperModule,
+        EntityModule
+      ],
       providers: [
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         {provide: MatDialogRef, useValue: {beforeClose: () => { return { subscribe: () => {}}}}},

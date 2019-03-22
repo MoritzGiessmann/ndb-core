@@ -33,7 +33,6 @@ describe('ChildrenListComponent', () => {
         AttendanceDaysComponent, AttendanceDayBlockComponent ],
       imports: [
         CommonModule,
-        RouterTestingModule.withRoutes([]),
         MatFormFieldModule,
         MatSelectModule,
         MatInputModule,

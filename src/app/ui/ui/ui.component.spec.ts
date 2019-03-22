@@ -65,8 +65,17 @@ describe('UiComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [SearchComponent, PrimaryActionComponent, UiComponent],
-      imports: [RouterTestingModule, CommonModule, FormsModule, MatIconModule, MatToolbarModule, MatSidenavModule,
-        MatAutocompleteModule, MatInputModule, MatFormFieldModule, NoopAnimationsModule,
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        CommonModule,
+        FormsModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatFormFieldModule,
+        NoopAnimationsModule,
         AppConfigModule,
         UiHelperModule,
         ChildrenModule,

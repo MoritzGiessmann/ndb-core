@@ -17,7 +17,11 @@ describe('AttendanceWarningsDashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ChildBlockComponent, SchoolBlockComponent, AttendanceWarningsDashboardComponent ],
-      imports: [MatIconModule, MatCardModule, RouterTestingModule],
+      imports: [
+        MatIconModule,
+        MatCardModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         ChildrenService,
         EntityMapperService,

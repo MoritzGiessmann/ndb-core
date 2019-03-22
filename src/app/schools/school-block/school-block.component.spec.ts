@@ -4,11 +4,10 @@ import { SchoolBlockComponent } from './school-block.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MatIconModule} from '@angular/material';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
-import {School} from '../school';
 import {ChildrenService} from '../../children/children.service';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
 import {Database} from '../../database/database';
-import {routes} from '../../app.routing';
+import {DemoData} from '../../database/demo-data';
 
 describe('SchoolBlockComponent', () => {
   let component: SchoolBlockComponent;
@@ -18,7 +17,10 @@ describe('SchoolBlockComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ SchoolBlockComponent ],
-      imports: [MatIconModule, RouterTestingModule.withRoutes([])],
+      imports: [
+        MatIconModule,
+        RouterTestingModule.withRoutes([])
+      ],
       providers: [
         EntityMapperService,
         ChildrenService,
@@ -31,7 +33,7 @@ describe('SchoolBlockComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SchoolBlockComponent);
     component = fixture.componentInstance;
-    component.entity = new School('');
+    component.entity = DemoData.getSchoolEntities()[0];
     fixture.detectChanges();
   });
 

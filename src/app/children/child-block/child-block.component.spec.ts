@@ -19,7 +19,10 @@ describe('ChildBlockComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SchoolBlockComponent, ChildBlockComponent ],
-      imports: [RouterTestingModule, MatIconModule],
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        MatIconModule
+      ],
       providers: [
         EntityMapperService,
         ChildrenService,

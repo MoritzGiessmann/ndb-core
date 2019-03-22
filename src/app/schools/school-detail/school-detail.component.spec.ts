@@ -11,7 +11,7 @@ import {
 } from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {SchoolsService} from '../schools.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {AlertService} from '../../alerts/alert.service';
@@ -20,14 +20,14 @@ import {Database} from '../../database/database';
 import { Location } from '@angular/common';
 import {Observable} from 'rxjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import * as uniqid from 'uniqid';
-import {MockDatabaseManagerService} from '../../database/mock-database-manager.service'; //  Necessary for usage of uniqid in the component
+import * as uniqid from 'uniqid'; //  Necessary for usage of uniqid in the component
+import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SchoolDetailComponent', () => {
   let component: SchoolDetailComponent;
   let fixture: ComponentFixture<SchoolDetailComponent>;
   const mockedRoute = {snapshot: { params: { id: 'new' } } };
-  const mockedRouter = {navigate: () => null};
   const mockedLocation = {back: () => null};
   const mockedSnackBar = {open: () => { return {
     onAction: () => Observable.create(observer => observer.next())
@@ -49,6 +49,7 @@ describe('SchoolDetailComponent', () => {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatInputModule,
+        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         EntityMapperService,
@@ -58,9 +59,8 @@ describe('SchoolDetailComponent', () => {
         { provide: ConfirmationDialogService, useValue: mockedConfirmationDialog},
         { provide: MatSnackBar, useValue: mockedSnackBar},
         { provide: Location, useValue: mockedLocation},
-        { provide: Router, useValue: mockedRouter},
         { provide: ActivatedRoute, useValue: mockedRoute},
-        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase()}
+        { provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
       ]
     })
     .compileComponents();

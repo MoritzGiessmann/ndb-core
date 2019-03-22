@@ -18,7 +18,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppVersionComponent } from './app-version.component';
-import {MatDialog, MatDialogModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material';
 import {SessionService} from '../../session/session.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {LatestChangesService} from '../latest-changes.service';
@@ -27,6 +27,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ChangelogComponent} from '../changelog/changelog.component';
 import {NgModule} from '@angular/core';
 import {of} from 'rxjs';
+import {RouterTestingModule} from '@angular/router/testing';
 
 
 @NgModule({
@@ -56,8 +57,12 @@ describe('AppVersionComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [AppVersionComponent],
-      imports: [TestModule,
-        MatDialogModule, NoopAnimationsModule],
+      imports: [
+        TestModule,
+        MatDialogModule,
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         {provide: SessionService, useValue: sessionService},
         {provide: EntityMapperService, useValue: entityMapper},

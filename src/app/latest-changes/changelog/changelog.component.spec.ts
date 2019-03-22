@@ -22,6 +22,7 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material'
 import {LatestChangesService} from '../latest-changes.service';
 import {Changelog} from '../changelog';
 import { of } from 'rxjs';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ChangelogComponent', () => {
   let component: ChangelogComponent;
@@ -35,7 +36,10 @@ describe('ChangelogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ChangelogComponent],
-      imports: [MatDialogModule],
+      imports: [
+        MatDialogModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         {provide: MatDialogRef, useValue: {}},
         {provide: MAT_DIALOG_DATA, useValue: {}},

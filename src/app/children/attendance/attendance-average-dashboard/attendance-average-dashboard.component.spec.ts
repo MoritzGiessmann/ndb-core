@@ -17,7 +17,11 @@ describe('AttendanceAverageDashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ChildBlockComponent, SchoolBlockComponent, AttendanceAverageDashboardComponent],
-      imports: [MatIconModule, MatCardModule, RouterTestingModule],
+      imports: [
+        MatIconModule,
+        MatCardModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         ChildrenService,
         EntityMapperService,

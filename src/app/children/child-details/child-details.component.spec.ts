@@ -11,7 +11,7 @@ import {
   MatTooltipModule, MatDialog,
 } from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {AlertService} from '../../alerts/alert.service';
@@ -37,12 +37,12 @@ import {SessionService} from '../../session/session.service';
 import {DatabaseManagerService} from '../../database/database-manager.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ChildDetailsComponent', () => {
   let component: ChildDetailsComponent;
   let fixture: ComponentFixture<ChildDetailsComponent>;
   const mockedRoute = {paramMap: Observable.create(observer => observer.next({get: () => 'new'})) };
-  const mockedRouter = {navigate: () => null};
   const mockedLocation = {back: () => null};
   const mockedSnackBar = {open: () => { return {
       onAction: () => Observable.create(observer => observer.next())
@@ -83,6 +83,7 @@ describe('ChildDetailsComponent', () => {
         FormsModule,
         MatAutocompleteModule,
         BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         EntityMapperService,
@@ -96,7 +97,6 @@ describe('ChildDetailsComponent', () => {
         { provide: ConfirmationDialogService, useValue: mockedConfirmationDialog},
         { provide: MatSnackBar, useValue: mockedSnackBar},
         { provide: Location, useValue: mockedLocation},
-        { provide: Router, useValue: mockedRouter},
         { provide: ActivatedRoute, useValue: mockedRoute},
         { provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
         FormBuilder,
