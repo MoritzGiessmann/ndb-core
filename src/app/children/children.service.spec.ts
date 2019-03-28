@@ -7,9 +7,11 @@ import {MockDatabaseManagerService} from '../database/mock-database-manager.serv
 
 describe('ChildrenService', () => {
   let service: ChildrenService;
+  let entityMapper: EntityMapperService;
   beforeEach(() => {
     const database = new MockDatabaseManagerService().getDatabase();
-    service = new ChildrenService(new EntityMapperService(database), database)
+    entityMapper = new EntityMapperService(database);
+    service = new ChildrenService(entityMapper, database);
   });
 
   it('should be created', () => {
@@ -17,6 +19,18 @@ describe('ChildrenService', () => {
   });
 
   // TODO: test getChildren
+  it('should get all children correctly', async () => {
+    const previous: Child[] = await service.getChildren().toPromise();
+    const child = new Child('newid');
+    let searched = previous.find(c => c.getId() === child.getId());
+    expect(searched).toBeUndefined();
+    await entityMapper.save<Child>(child);
+    const after: Child[] = await service.getChildren().toPromise();
+    expect(after.length).toBe(previous.length + 1);
+    searched = after.find(c => c.getId() === child.getId());
+    expect(searched).toBeTruthy();
+    expect(searched.getId()).toBe('newid');
+  });
 
   // TODO: test getChild
 
