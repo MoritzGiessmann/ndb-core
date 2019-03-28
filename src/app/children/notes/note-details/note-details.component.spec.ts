@@ -56,6 +56,7 @@ describe('NoteDetailsComponent', () => {
         MatIconModule,
         UiHelperModule,
         EntityModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},
