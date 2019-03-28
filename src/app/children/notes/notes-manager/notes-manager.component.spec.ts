@@ -17,6 +17,7 @@ import {SchoolBlockComponent} from '../../../schools/school-block/school-block.c
 import {SessionService} from '../../../session/session.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('NotesManagerComponent', () => {
   let component: NotesManagerComponent;
@@ -39,6 +40,7 @@ describe('NotesManagerComponent', () => {
         MatExpansionModule,
         MatDialogModule,
         NoopAnimationsModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },

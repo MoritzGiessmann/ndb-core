@@ -11,6 +11,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {SchoolBlockComponent} from '../../schools/school-block/school-block.component';
 import {Database} from '../../database/database';
 import {MockDatabaseManagerService} from '../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ChildSelectComponent', () => {
   let component: ChildSelectComponent;
@@ -21,8 +22,16 @@ describe('ChildSelectComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ ChildSelectComponent, ChildBlockComponent, SchoolBlockComponent ],
-      imports: [MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatIconModule,
-        FormsModule, CommonModule, NoopAnimationsModule],
+      imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatIconModule,
+        FormsModule,
+        CommonModule,
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([])
+      ],
       providers: [
         ChildrenService,
         EntityMapperService,

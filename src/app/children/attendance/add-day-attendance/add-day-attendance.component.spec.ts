@@ -16,6 +16,7 @@ import {Database} from '../../../database/database';
 import {EntityModule} from '../../../entity/entity.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AddDayAttendanceComponent', () => {
   let component: AddDayAttendanceComponent;
@@ -24,9 +25,19 @@ describe('AddDayAttendanceComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AddDayAttendanceComponent, SchoolBlockComponent, ChildBlockComponent ],
-      imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatButtonToggleModule,
-        MatIconModule, MatProgressBarModule, NoopAnimationsModule,
-        EntityModule],
+      imports: [
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatProgressBarModule,
+        NoopAnimationsModule,
+        EntityModule,
+        RouterTestingModule.withRoutes([]),
+      ],
       providers: [
         {provide: ChildrenService, useClass: ChildrenService},
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},

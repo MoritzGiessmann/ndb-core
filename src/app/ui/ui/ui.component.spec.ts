@@ -84,6 +84,7 @@ describe('UiComponent', () => {
         LatestChangesModule,
         SessionModule,
         FlexLayoutModule,
+        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         {provide: DatabaseManagerService, useClass: MockDatabaseManagerService},

@@ -34,9 +34,22 @@ describe('AttendanceManagerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AttendanceManagerComponent, ChildBlockComponent, AttendanceBlockComponent, AttendanceDayBlockComponent,
         AttendanceDaysComponent, SchoolBlockComponent ],
-      imports: [ MatFormFieldModule, MatInputModule, MatButtonToggleModule, MatExpansionModule, MatButtonModule, MatTableModule,
-        MatProgressBarModule, MatTooltipModule, MatSelectModule, MatIconModule, FormsModule, NoopAnimationsModule,
-        UiHelperModule, EntityModule],
+      imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonToggleModule,
+        MatExpansionModule,
+        MatButtonModule,
+        MatTableModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        MatSelectModule,
+        MatIconModule,
+        FormsModule,
+        NoopAnimationsModule,
+        UiHelperModule,
+        EntityModule
+      ],
       providers: [
         ChildrenService,
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},

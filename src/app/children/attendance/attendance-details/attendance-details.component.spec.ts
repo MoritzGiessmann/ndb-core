@@ -47,7 +47,8 @@ describe('AttendanceDetailsComponent', () => {
         CommonModule,
         NoopAnimationsModule,
         UiHelperModule,
-        EntityModule
+        EntityModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         {provide: Database, useValue: new MockDatabaseManagerService().getDatabase()},

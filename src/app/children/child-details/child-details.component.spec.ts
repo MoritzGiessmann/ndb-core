@@ -83,6 +83,7 @@ describe('ChildDetailsComponent', () => {
         FormsModule,
         MatAutocompleteModule,
         BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         EntityMapperService,

@@ -11,6 +11,7 @@ import PouchDB from 'pouchdb-browser';
 import {ChildrenModule} from '../../children/children.module';
 import {SchoolsModule} from '../../schools/schools.module';
 import {AlertService} from '../../alerts/alert.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -20,9 +21,18 @@ describe('SearchComponent', () => {
     const pouchDB = new PouchDatabase(new PouchDB('unit-test-search'), new AlertService(null, null));
 
     TestBed.configureTestingModule({
-      imports: [MatIconModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule,
-        CommonModule, FormsModule, NoopAnimationsModule,
-        ChildrenModule, SchoolsModule, MatToolbarModule,
+      imports: [
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        CommonModule,
+        FormsModule,
+        NoopAnimationsModule,
+        ChildrenModule,
+        SchoolsModule,
+        MatToolbarModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [{ provide: Database, useValue: pouchDB }],
       declarations: [ SearchComponent ]

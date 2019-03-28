@@ -18,7 +18,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavigationComponent } from './navigation.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import {SessionService} from '../../session/session.service';
 import {NavigationItemsService} from '../navigation-items.service';
 import {MenuItem} from '../menu-item';
@@ -27,6 +26,7 @@ import {
   MatIconModule,
   MatListModule,
 } from '@angular/material';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -42,9 +42,10 @@ describe('NavigationComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [
+        MatListModule,
         MatIconModule,
         MatDividerModule,
-        MatListModule,
+        RouterTestingModule,
       ],
       declarations: [
         NavigationComponent,

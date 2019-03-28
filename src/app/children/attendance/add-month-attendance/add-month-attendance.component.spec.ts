@@ -18,6 +18,7 @@ import {UiHelperModule} from '../../../ui-helper/ui-helper.module';
 import {AlertsModule} from '../../../alerts/alerts.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MockDatabaseManagerService} from '../../../database/mock-database-manager.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AddMonthAttendanceComponent', () => {
   let component: AddMonthAttendanceComponent;
@@ -40,6 +41,7 @@ describe('AddMonthAttendanceComponent', () => {
         UiHelperModule,
         AlertsModule,
         NoopAnimationsModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         EntityMapperService,
