@@ -49,7 +49,7 @@ describe('SchoolDetailComponent', () => {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatInputModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         EntityMapperService,

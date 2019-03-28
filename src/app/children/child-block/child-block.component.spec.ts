@@ -20,8 +20,8 @@ describe('ChildBlockComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SchoolBlockComponent, ChildBlockComponent ],
       imports: [
-        RouterTestingModule.withRoutes([]),
-        MatIconModule
+        MatIconModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         EntityMapperService,

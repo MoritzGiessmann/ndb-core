@@ -45,7 +45,6 @@ describe('AttendanceDetailsComponent', () => {
         MatTooltipModule,
         FormsModule,
         CommonModule,
-        RouterTestingModule.withRoutes([]),
         NoopAnimationsModule,
         UiHelperModule,
         EntityModule

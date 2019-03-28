@@ -45,7 +45,6 @@ describe('NavigationComponent', () => {
         MatIconModule,
         MatDividerModule,
         MatListModule,
-        RouterTestingModule.withRoutes([])
       ],
       declarations: [
         NavigationComponent,

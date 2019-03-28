@@ -38,7 +38,6 @@ describe('ChangelogComponent', () => {
       declarations: [ChangelogComponent],
       imports: [
         MatDialogModule,
-        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         {provide: MatDialogRef, useValue: {}},

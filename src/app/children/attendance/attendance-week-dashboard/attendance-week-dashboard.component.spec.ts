@@ -27,8 +27,9 @@ describe('AttendanceWeekDashboardComponent', () => {
         MatIconModule,
         MatCardModule,
         MatTooltipModule,
-        RouterTestingModule.withRoutes([]),
-        EntityModule],
+        EntityModule,
+        RouterTestingModule.withRoutes([])
+      ],
       providers: [
         ChildrenService,
         { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },

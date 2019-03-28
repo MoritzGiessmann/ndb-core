@@ -39,7 +39,6 @@ describe('NotesComponent', () => {
       imports: [
         UiHelperModule,
         NoopAnimationsModule,
-        RouterTestingModule.withRoutes([])
       ],
       providers: [
         DatePipe,

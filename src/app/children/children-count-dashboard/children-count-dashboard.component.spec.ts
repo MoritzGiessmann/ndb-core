@@ -35,7 +35,7 @@ describe('ChildrenCountDashboardComponent', () => {
       imports: [
         MatIconModule,
         MatCardModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [{ provide: ChildrenService, useValue: childrenService }],
     })

@@ -20,7 +20,7 @@ describe('AttendanceWarningsDashboardComponent', () => {
       imports: [
         MatIconModule,
         MatCardModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         ChildrenService,

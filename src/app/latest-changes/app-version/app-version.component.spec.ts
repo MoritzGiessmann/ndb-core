@@ -61,7 +61,6 @@ describe('AppVersionComponent', () => {
         TestModule,
         MatDialogModule,
         NoopAnimationsModule,
-        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         {provide: SessionService, useValue: sessionService},

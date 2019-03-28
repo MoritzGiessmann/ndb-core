@@ -28,7 +28,6 @@ describe('ChildAttendanceComponent', () => {
         MatSelectModule,
         FormsModule,
         MatTooltipModule,
-        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         { provide: ActivatedRoute, useValue: {params: of({id: '22'})} },

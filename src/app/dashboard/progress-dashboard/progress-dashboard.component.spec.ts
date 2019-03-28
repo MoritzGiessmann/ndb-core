@@ -33,7 +33,6 @@ describe('ProgressDashboardComponent', () => {
         MatProgressBarModule,
         CommonModule,
         FormsModule,
-        RouterTestingModule.withRoutes([]),
       ],
       providers: [
         { provide: Database, useValue: new MockDatabaseManagerService().getDatabase() },

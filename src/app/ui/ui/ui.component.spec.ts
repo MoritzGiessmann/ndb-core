@@ -66,7 +66,6 @@ describe('UiComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SearchComponent, PrimaryActionComponent, UiComponent],
       imports: [
-        RouterTestingModule.withRoutes([]),
         CommonModule,
         FormsModule,
         MatIconModule,

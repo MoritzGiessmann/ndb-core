@@ -35,7 +35,7 @@ describe('SchoolsListComponent', () => {
         MatExpansionModule,
         FormsModule,
         BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         SchoolsService,
