@@ -9,7 +9,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import {ChildrenService} from '../children.service';
 import {EntityMapperService} from '../../entity/entity-mapper.service';
 import {UiHelperModule} from '../../ui-helper/ui-helper.module';
-import { MatTableModule, MatSelectModule, MatOptionModule, MatAutocomplete, MatAutocompleteModule, MatFormFieldModule, MatIcon, MatIconModule, MatSnackBar, MatDialog, MatDialogModule } from '@angular/material';
+import { MatTableModule, MatSelectModule, MatOptionModule, MatAutocomplete,
+MatAutocompleteModule, MatFormFieldModule, MatIcon, MatIconModule, MatSnackBar, MatDialog, MatDialogModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogService } from 'app/ui-helper/confirmation-dialog/confirmation-dialog.service';
 
