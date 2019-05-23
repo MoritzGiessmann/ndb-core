@@ -32,6 +32,7 @@ import { SyncStatusModule } from './sync-status/sync-status.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { LatestChangesModule } from './latest-changes/latest-changes.module';
 import { UserModule } from './user/user.module';
+import { CryptoPouch } from 'crypto-pouch';
 
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ChildrenModule } from './children/children.module';
@@ -72,6 +73,7 @@ import {CookieService} from 'ngx-cookie-service';
     SchoolsModule,
     AdminModule,
     MatIconModule,
+    CryptoPouch
   ],
   providers: [
     AppConfig,

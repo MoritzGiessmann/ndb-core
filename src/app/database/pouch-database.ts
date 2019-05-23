@@ -18,7 +18,7 @@
 import {Database} from './database';
 import {AlertService} from '../alerts/alert.service';
 import {AlertDisplay} from '../alerts/alert-display';
-
+import {CryptoPouch} from 'crypto-pouch';
 /**
  * Wrapper for a PouchDB instance to decouple the code from
  * that external library.
@@ -31,6 +31,17 @@ export class PouchDatabase extends Database {
   constructor(private _pouchDB: any,
               private alertService: AlertService) {
     super();
+    _pouchDB.crypto('password');
+    _pouchDB.put({_id: 'foo', bar: 'baz'}).then(function () {
+      return _pouchDB.get('foo');
+    }).then(function (doc) {
+      console.log('decrypted', doc);
+      return _pouchDB.removeCrypto();
+    }).then(function () {
+      return _pouchDB.get('foo');
+    }).then(function (doc) {
+      console.log('encrypted', doc);
+    })
   }
 
   get(id: string) {
