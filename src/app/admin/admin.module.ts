@@ -21,4 +21,7 @@ import {AdminGuard} from './admin.guard';
   declarations: [AdminComponent],
   providers: [AdminGuard],
 })
+/**
+ * The main class of the admin-module.
+ */
 export class AdminModule { }

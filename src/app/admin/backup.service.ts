@@ -6,13 +6,31 @@ import {Papa} from 'ngx-papaparse';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * This class implements a backup-service for the user database.
+ *
+ * @public
+ */
 export class BackupService {
   static readonly SEPARATOR_ROW = '\n';
   static readonly SEPARATOR_COL = ',';
 
+  /**
+   * The constructor of the class {@link BackupService BackupService}.
+   * @param db Database  The user-database.
+   * @param papa Papa  A string parser.
+   */
   constructor(private db: Database,
               private papa: Papa) { }
 
+
+   /**
+   * This method returns the elements of the user-database as a json export.
+   *
+   * @returns Promise<string>  The 'stringified' export of the user-database.
+   *
+   * @public
+    */
   getJsonExport(): Promise<string> {
     return this.db.getAll()
       .then(results => {
@@ -25,6 +43,14 @@ export class BackupService {
       });
   }
 
+
+  /**
+   * This method returns the csv-(comma-seperated-values)export of the user-database.
+   *
+   * @returns Promise<string>  A string with the csv-formatted content of the user-database.
+   *
+   * @public
+   */
   getCsvExport(): Promise<string> {
     return this.db.getAll()
       .then(results => {
@@ -44,7 +70,13 @@ export class BackupService {
   }
 
 
-
+  /**
+   * This method deletes the entries of the admin-database.
+   *
+   * @returns Promise<any>  The list, that is about to be emptied.
+   *
+   * @public
+   */
   clearDatabase(): Promise<any> {
     const userEntityPrefix = new User('').getType() + ':';
 
@@ -60,6 +92,13 @@ export class BackupService {
     });
   }
 
+
+  /**
+   * This method imports a json-like string and adds it's contents to the database.
+   *
+   * @param json string  A string with json-formatted database-contend.
+   * @param forceUpdate boolean
+   */
   importJson(json, forceUpdate = false) {
     const promises = [];
     json.split(BackupService.SEPARATOR_ROW)
