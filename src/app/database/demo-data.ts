@@ -250,7 +250,10 @@ export class DemoData {
     rel1.childId = '1';
     rel1.schoolId = '1';
     rel1.start = '2016-10-01';
+<<<<<<< HEAD
     rel1.start = '2016-10-03';
+=======
+>>>>>>> master
     rel1.schoolClass = '2';
     data.push(rel1);
 
@@ -266,7 +269,10 @@ export class DemoData {
     rel2.childId = '2';
     rel2.schoolId = '2';
     rel2.start = '2018-05-07';
+<<<<<<< HEAD
     rel2.end = '2018-05-08';
+=======
+>>>>>>> master
     rel2.schoolClass = '3';
     data.push(rel2);
 
@@ -274,7 +280,10 @@ export class DemoData {
     rel3.childId = '3';
     rel3.schoolId = '1';
     rel3.start = '2010-01-01';
+<<<<<<< HEAD
     rel3.end = '2010-01-02';
+=======
+>>>>>>> master
     rel3.schoolClass = '2';
     data.push(rel3);
 

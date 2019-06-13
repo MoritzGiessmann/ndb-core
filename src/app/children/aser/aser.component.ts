@@ -46,7 +46,11 @@ export class AserComponent implements OnInit {
     this.childrenService.getAserResultsOfChild(id)
       .subscribe(results => {
         this.records = results
+<<<<<<< HEAD
           //.sort((a, b) => b.date.valueOf() - a.date.valueOf());
+=======
+          .sort((a, b) => (b.date ? b.date.valueOf() : 0) - (a.date ? a.date.valueOf() : 0) )
+>>>>>>> master
       });
   }
 

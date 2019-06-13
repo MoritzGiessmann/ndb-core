@@ -290,6 +290,7 @@ export class ChildrenService {
     );
   }
 
+<<<<<<< HEAD
   // getPreviousSchoolsOfChild(childId: string) {//: Observable<ChildSchoolRelation[]> {
   //   return from(
   //     this.entityMapper.loadType<ChildSchoolRelation>(ChildSchoolRelation)
@@ -330,6 +331,8 @@ export class ChildrenService {
       //   })
       //   .catch(() => this.loggingService.error('[ViewSchoolsComponent] loading from database error.'))
 
+=======
+>>>>>>> master
   getCurrentSchool(childId: string): Promise<School> {
     return this.queryLatestRelation(childId)
       .then(relation => {
